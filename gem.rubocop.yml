@@ -96,6 +96,7 @@ Metrics/AbcSize:
 # ブロック長警告を無効にするメソッドを指定
 Metrics/BlockLength:
   Exclude:
+    - 'spec/**/*' # RspecのDSL
     - '*.gemspec' # Gem定義
   IgnoredMethods:
     - 'configure'
