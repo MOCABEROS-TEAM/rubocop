@@ -212,3 +212,7 @@ Performance/StringIdentifierArgument:
 # ドキュメンテーションを強制しない
 Style/Documentation:
   Enabled: false
+
+# Ruby3.1の新しい短縮記法を強制しない
+Style/HashSyntax:
+  Enabled: false

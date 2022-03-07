@@ -262,3 +262,7 @@ RSpec/FactoryBot/SyntaxMethods:
 # 状況に応じて使い分けたため
 Performance/StringIdentifierArgument:
   Enabled: false
+
+# Ruby3.1の新しい短縮記法を強制しない
+Style/HashSyntax:
+  Enabled: false
