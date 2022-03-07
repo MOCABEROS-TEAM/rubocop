@@ -208,3 +208,7 @@ Lint/MissingSuper:
 # 状況に応じて使い分けたため
 Performance/StringIdentifierArgument:
   Enabled: false
+
+# ドキュメンテーションを強制しない
+Style/Documentation:
+  Enabled: false

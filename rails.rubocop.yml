@@ -247,11 +247,9 @@ RSpec/LetSetup:
 RSpec/VerifiedDoubles:
   Enabled: false
 
-# マイグレーションファイルを除外
+# 注釈を強制しない
 Style/Documentation:
-  Exclude:
-    - 'db/**/*'
-    - 'config/**/*'
+  Enabled: false
 
 # 抽象クラスでsuperを呼び出す必要がない場合があるため
 Lint/MissingSuper:
