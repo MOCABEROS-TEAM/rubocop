@@ -7,12 +7,7 @@ $ git submodule add https://github.com/mocaberos/rubocop.git ./vendor/rubocop
 ```
 Inherit settings
 ```yaml
-# For Rails
-inherit_from: ./vendor/rubocop/rails.rubocop.yml
-```
-```yaml
-# For Ruby
-inherit_from: ./vendor/rubocop/ruby.rubocop.yml
+inherit_from: ./vendor/rubocop/rubocop.yml
 ```
 
 ### reference
