@@ -1,16 +1,21 @@
-# Rubocop設定ファイル
+# Ruby & Rails Style Guides
 
-### 使用方法
-サブモジュールとして追加して利用する。
+### Usage
+Add a git submodule
 ```shell
 $ git submodule add https://github.com/mocaberos/rubocop.git ./vendor/rubocop
 ```
-設定を継承して使用する
+Inherit settings
 ```yaml
-# rails用
+# For Rails
 inherit_from: ./vendor/rubocop/rails.rubocop.yml
 ```
 ```yaml
-# gem用
-inherit_from: ./vendor/rubocop/gem.rubocop.yml
+# For Ruby
+inherit_from: ./vendor/rubocop/ruby.rubocop.yml
 ```
+
+### reference
+- https://github.com/cookpad/global-style-guides
+- https://github.com/rubocop/ruby-style-guide
+- https://github.com/rubocop/rails-style-guide
