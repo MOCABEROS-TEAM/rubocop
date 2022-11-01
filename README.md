@@ -3,7 +3,7 @@
 ### Usage
 Add a git submodule
 ```shell
-$ git submodule add https://github.com/mocaberos/rubocop.git ./vendor/rubocop
+$ git submodule add https://github.com/MOCABEROS-TEAM/rubocop.git ./vendor/rubocop
 ```
 Inherit settings
 ```yaml

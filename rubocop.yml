@@ -5,6 +5,7 @@
 #   gem 'rubocop-rails',       require: false
 #   gem 'rubocop-rspec',       require: false
 #   gem 'rubocop-rake',        require: false
+#   gem 'rubocop-thread_safety', require: false
 # end
 #
 # inherit_from: ./vendor/rubocop/rubocop.yml
@@ -15,20 +16,26 @@ require:
   - rubocop-performance
   - rubocop-rspec
   - rubocop-rake
+  - rubocop-thread_safety
 
 AllCops:
   NewCops: enable
 
+# https://github.com/cookpad/global-style-guides/blob/main/.rubocop.performance.yml
 Performance/RedundantMerge:
   Enabled: false
 
 Performance/TimesMap:
   Enabled: false
 
+# https://github.com/cookpad/global-style-guides/blob/main/.rubocop.rails.yml
 Rails/ActionFilter:
   Enabled: false
 
 Rails/Delegate:
+  Enabled: false
+
+Rails/DynamicFindBy:
   Enabled: false
 
 Rails/Output:
@@ -39,25 +46,31 @@ Rails/Output:
     - lib/**/*.rb
     - spec/**/*.rb
 
-Rails/SkipsModelValidations:
-  Enabled: false
-
 Rails/RequestReferer:
   EnforcedStyle: referrer
 
-Rails/DynamicFindBy:
+Rails/SkipsModelValidations:
   Enabled: false
 
+# https://github.com/cookpad/global-style-guides/blob/main/.rubocop.ruby.yml
 Bundler/OrderedGems:
   ConsiderPunctuation: true
 
-Metrics/BlockLength:
+Layout/ArgumentAlignment:
+  EnforcedStyle: with_fixed_indentation
+
+Layout/ConditionPosition:
+  Enabled: false
+
+Layout/DotPosition:
+  EnforcedStyle: trailing
+
+Layout/EmptyLines:
   Exclude:
-    - spec/**/*.rb
-    - config/**/*.rb
-    - db/migrate/*.rb
-    - lib/tasks/**/*.rake
-    - Gemfile
+    - spec/**/*
+
+Layout/IndentationConsistency:
+  EnforcedStyle: indented_internal_methods
 
 Layout/LineLength:
   AllowHeredoc: true
@@ -67,11 +80,96 @@ Layout/LineLength:
     - Gemfile
     - spec/**/*
 
+Lint/AmbiguousOperator:
+  Enabled: false
+
+Lint/AmbiguousRegexpLiteral:
+  Enabled: false
+
+Lint/AssignmentInCondition:
+  Enabled: false
+
+Lint/DeprecatedClassMethods:
+  Enabled: false
+
+Lint/ElseLayout:
+  Enabled: false
+
+Lint/FlipFlop:
+  Enabled: false
+
+Lint/LiteralInInterpolation:
+  Enabled: false
+
+Lint/Loop:
+  Enabled: false
+
+Lint/MissingSuper:
+  Enabled: false
+
+Lint/ParenthesesAsGroupedExpression:
+  Enabled: false
+
+Lint/RequireParentheses:
+  Enabled: false
+
+Lint/SuppressedException:
+  Enabled: false
+
+Lint/UnderscorePrefixedVariableName:
+  Enabled: false
+
+Lint/UnusedMethodArgument:
+  Enabled: false
+
+Lint/UselessAssignment:
+  Exclude:
+    - spec/**/*
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*.rb
+    - config/**/*.rb
+    - db/migrate/*.rb
+    - lib/tasks/**/*.rake
+    - Gemfile
+
+Metrics/BlockNesting:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
 Metrics/ModuleLength:
   Exclude:
     - spec/**/*
 
+Metrics/ParameterLists:
+  Enabled: false
+
 Naming/AccessorMethodName:
+  Enabled: false
+
+Naming/AsciiIdentifiers:
+  Enabled: false
+
+Naming/FileName:
+  Enabled: false
+
+Naming/MemoizedInstanceVariableName:
+  EnforcedStyleForLeadingUnderscores: required
+
+Naming/PredicateName:
+  ForbiddenPrefixes:
+    - is_
+
+Naming/VariableNumber:
   Enabled: false
 
 Style/Alias:
@@ -83,13 +181,7 @@ Style/ArrayJoin:
 Style/AsciiComments:
   Enabled: false
 
-Naming/AsciiIdentifiers:
-  Enabled: false
-
 Style/Attr:
-  Enabled: false
-
-Metrics/BlockNesting:
   Enabled: false
 
 Style/CaseEquality:
@@ -99,9 +191,6 @@ Style/CharacterLiteral:
   Enabled: false
 
 Style/ClassAndModuleChildren:
-  Enabled: false
-
-Metrics/ClassLength:
   Enabled: false
 
 Style/ClassVars:
@@ -120,14 +209,8 @@ Style/ColonMethodCall:
 Style/CommentAnnotation:
   Enabled: false
 
-Metrics/CyclomaticComplexity:
-  Enabled: false
-
 Style/Documentation:
   Enabled: false
-
-Layout/DotPosition:
-  EnforcedStyle: trailing
 
 Style/DoubleNegation:
   Enabled: false
@@ -144,14 +227,11 @@ Style/Encoding:
 Style/EvenOdd:
   Enabled: false
 
-Naming/FileName:
-  Enabled: false
-
-Lint/FlipFlop:
-  Enabled: false
-
 Style/FormatString:
   Enabled: false
+
+Style/FormatStringToken:
+  EnforcedStyle: template
 
 Style/FrozenStringLiteralComment:
   Enabled: false
@@ -162,14 +242,14 @@ Style/GlobalVars:
 Style/GuardClause:
   Enabled: false
 
+Style/HashSyntax:
+  EnforcedShorthandSyntax: consistent
+
 Style/IfUnlessModifier:
   Enabled: false
 
 Style/IfWithSemicolon:
   Enabled: false
-
-Layout/IndentationConsistency:
-  EnforcedStyle: indented_internal_methods
 
 Style/InlineComment:
   Enabled: false
@@ -181,9 +261,6 @@ Style/LambdaCall:
   Enabled: false
 
 Style/LineEndConcatenation:
-  Enabled: false
-
-Metrics/MethodLength:
   Enabled: false
 
 Style/ModuleFunction:
@@ -204,21 +281,29 @@ Style/NilComparison:
 Style/NumericLiterals:
   Enabled: false
 
+Style/NumericPredicate:
+  EnforcedStyle: comparison
+
 Style/OneLineConditional:
   Enabled: false
 
 Style/ParallelAssignment:
   Enabled: false
 
-Metrics/ParameterLists:
-  Enabled: false
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    "%": "()"
+    "%i": "()"
+    "%q": "()"
+    "%Q": "()"
+    "%r": "{}"
+    "%s": "()"
+    "%w": "()"
+    "%W": "()"
+    "%x": "()"
 
 Style/PerlBackrefs:
   Enabled: false
-
-Naming/PredicateName:
-  ForbiddenPrefixes:
-    - is_
 
 Style/Proc:
   Enabled: false
@@ -232,13 +317,13 @@ Style/RegexpLiteral:
 Style/SelfAssignment:
   Enabled: false
 
+Style/SignalException:
+  Enabled: false
+
 Style/SingleLineBlockParams:
   Enabled: false
 
 Style/SingleLineMethods:
-  Enabled: false
-
-Style/SignalException:
   Enabled: false
 
 Style/SpecialGlobalVars:
@@ -247,25 +332,16 @@ Style/SpecialGlobalVars:
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: no_comma
+
 Style/TrailingCommaInArrayLiteral:
   EnforcedStyleForMultiline: no_comma
 
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: no_comma
 
-Style/TrailingCommaInArguments:
-  EnforcedStyleForMultiline: no_comma
-
-Style/FormatStringToken:
-  EnforcedStyle: template
-
 Style/TrivialAccessors:
-  Enabled: false
-
-Lint/UnusedMethodArgument:
-  Enabled: false
-
-Naming/VariableNumber:
   Enabled: false
 
 Style/VariableInterpolation:
@@ -279,71 +355,3 @@ Style/WhileUntilModifier:
 
 Style/WordArray:
   Enabled: false
-
-Lint/AmbiguousOperator:
-  Enabled: false
-
-Lint/AmbiguousRegexpLiteral:
-  Enabled: false
-
-Lint/AssignmentInCondition:
-  Enabled: false
-
-Layout/ConditionPosition:
-  Enabled: false
-
-Lint/DeprecatedClassMethods:
-  Enabled: false
-
-Lint/ElseLayout:
-  Enabled: false
-
-Lint/SuppressedException:
-  Enabled: false
-
-Lint/LiteralInInterpolation:
-  Enabled: false
-
-Lint/Loop:
-  Enabled: false
-
-Lint/ParenthesesAsGroupedExpression:
-  Enabled: false
-
-Lint/RequireParentheses:
-  Enabled: false
-
-Lint/UnderscorePrefixedVariableName:
-  Enabled: false
-
-Lint/MissingSuper:
-  Enabled: false
-
-Lint/UselessAssignment:
-  Exclude:
-    - spec/**/*
-
-Layout/ArgumentAlignment:
-  EnforcedStyle: with_fixed_indentation
-
-Layout/EmptyLines:
-  Exclude:
-    - spec/**/*
-
-Style/NumericPredicate:
-  EnforcedStyle: comparison
-
-Style/PercentLiteralDelimiters:
-  PreferredDelimiters:
-    "%":  ()
-    "%i": ()
-    "%q": ()
-    "%Q": ()
-    "%r": "{}"
-    "%s": ()
-    "%w": ()
-    "%W": ()
-    "%x": ()
-
-Naming/MemoizedInstanceVariableName:
-  EnforcedStyleForLeadingUnderscores: required
